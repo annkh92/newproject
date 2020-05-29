@@ -27,13 +27,15 @@ namespace AFS
         private IWebElement ReorderLevel => driver.FindElement(By.Id("ReorderLevel"));
         private IWebElement ProductCheck => driver.FindElement(By.LinkText("Kungaloosh"));
         
-        public void Add()
+        public ProductsPage Add()
         {
             new Actions(driver).Click(AllProductsLink).Build().Perform();
+            return this;
         }
-        
-        public void AddProduct(Product pr)
+        public ProductsPage AddProduct(Product pr)
         {
+            new Actions(driver).Click(AllProductsLink).Build().Perform();
+            new Actions(driver).Click(OkButton).Build().Perform();
             new Actions(driver).Click().Click(ProductName).SendKeys(pr.prodname).Build().Perform();
             new Actions(driver).Click().Click(Category).SendKeys(pr.category).Build().Perform();
             new Actions(driver).Click().Click(Supplier).SendKeys(pr.supplier).Build().Perform();
@@ -42,52 +44,53 @@ namespace AFS
             new Actions(driver).Click().Click(UnitsInStock).SendKeys(pr.instock).Build().Perform();
             new Actions(driver).Click().Click(UnitsOnOrder).SendKeys(pr.onorder).Build().Perform();
             new Actions(driver).Click().Click(ReorderLevel).SendKeys(pr.reorderlevel).Build().Perform();
+            return this;
         }
-
-        public void SetSetProductParameter(IWebElement parameter, string value)
+        public void SetProductParameter(IWebElement parameter, string value)
         {
             new Actions(driver).Click().Click(parameter).SendKeys(value).Build().Perform();
         }
 
         public void SetProductName(string value)
         {
-            SetSetProductParameter(ProductName, value);
+            SetProductParameter(ProductName, value);
         }
 
         public void SetCategory(string value)
         {
-            SetSetProductParameter(Category, value);
+            SetProductParameter(Category, value);
         }
 
         public void SetSupplier(string value)
         {
-            SetSetProductParameter(Supplier, value);
+            SetProductParameter(Supplier, value);
         }
         public void SetPrice(string value)
         {
-            SetSetProductParameter(UnitPrice, value);
+            SetProductParameter(UnitPrice, value);
         }
         public void SetQuantity(string value)
         {
-            SetSetProductParameter(QuantityPerUnit, value);
+            SetProductParameter(QuantityPerUnit, value);
         }
         public void SetStock(string value)
         {
-            SetSetProductParameter(UnitsInStock, value);
+            SetProductParameter(UnitsInStock, value);
         }
 
         public void SetOrder(string value)
         {
-            SetSetProductParameter(UnitsOnOrder, value);
+            SetProductParameter(UnitsOnOrder, value);
         }
         public void SetRL(string value)
         {
-            SetSetProductParameter(ReorderLevel, value);
+            SetProductParameter(ReorderLevel, value);
         }
 
-        public void ClickButton()
+        public ProductsPage ClickButton()
         {
             new Actions(driver).Click(OkButton).Build().Perform();
+            return this;
         }
 
         public string Check()

@@ -1,9 +1,4 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using System;
-using AFS;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
 namespace AFS
@@ -19,22 +14,34 @@ namespace AFS
         private IWebElement MyName => driver.FindElement(By.Id("Name"));
         private IWebElement Pass => driver.FindElement(By.Id("Password"));
         private IWebElement OkButton => driver.FindElement(By.CssSelector(".btn"));
-        private IWebElement title => driver.FindElement(By.CssSelector("h2"));
-        public void LogIn(LogPass logpass)
+        private IWebElement Title => driver.FindElement(By.CssSelector("h2"));
+        public string Check()
+        {
+            return Title.Text;
+        }
+        public StartPage Login(LogPass logpass)
         {
             new Actions(driver).Click(MyName).SendKeys(logpass.myname).Build().Perform();
-        }
-        public void Password(LogPass logpass)
-        {
             new Actions(driver).Click(Pass).SendKeys(logpass.mypass).Build().Perform();
+            return new StartPage(driver);
         }
-        public void ClickButton() 
+        public StartPage ClickButton()
         {
             new Actions(driver).Click(OkButton).Build().Perform();
+            return new StartPage(driver);
         }
-        public string Title()
+        public void SetLoginPassword(IWebElement logpass, string value)
         {
-            return title.Text;
+            new Actions(driver).Click().Click(logpass).SendKeys(value).Build().Perform();
+        }
+        public void SetUserName(string value)
+        {
+            SetLoginPassword(MyName, value);
+        }
+
+        public void SetUserPass(string value)
+        {
+            SetLoginPassword(Pass, value);
         }
     }
 }

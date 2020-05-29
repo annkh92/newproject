@@ -19,15 +19,16 @@ namespace AFS
 
         private IWebElement Leave => driver.FindElement(By.LinkText("Logout"));
 
-        private IWebElement title => driver.FindElement(By.CssSelector("h2"));
+        private IWebElement Title => driver.FindElement(By.CssSelector("h2"));
 
-        public void LogOut()
+        public LogoutPage LogOut()
         {
             new Actions(driver).Click(Leave).Build().Perform();
+            return this;
         }
-        public string Title()
+        public string Check()
         {
-            return title.Text;
+            return Title.Text;
         }
     }
 }

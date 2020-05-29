@@ -23,13 +23,13 @@ namespace AFS.StepDefinition
         [When(@"I enter ""(.*)"" login")]
         public void WhenIEnterLogin(string myname)
         {
-            new StartPage(driver).LogIn(new LogPass(myname, null));
+            new StartPage(driver).SetUserName(myname);
         }
 
         [When(@"I enter ""(.*)"" password")]
         public void WhenIEnterPassword(string mypass)
         {
-            new StartPage(driver).Password(new LogPass(null, mypass));
+            new StartPage(driver).SetUserPass(mypass);
         }
 
         [When(@"I click on login button")]
@@ -99,11 +99,10 @@ namespace AFS.StepDefinition
             new ProductsPage(driver).ClickButton();
         }
 
-        [Then(@"Product should be added")]
-        public void TitleOfPageShouldBe()
+        [Then(@"""(.*)"" should be added")]
+        public void ProductShouldBeAdded(string newproductname)
         {
-            productsPage = new ProductsPage(driver);
-            Assert.AreEqual("Kungaloosh", productsPage.Check());
+            Assert.AreEqual(newproductname, new ProductsPage(driver).Check());
         }
     }
 }

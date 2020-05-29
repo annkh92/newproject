@@ -20,4 +20,4 @@
 		And I type units on order "100"
 		And I type reorder level "75"
 		And I click on send button
-		Then Product should be added
+		Then "Kungaloosh" should be added
