@@ -38,8 +38,7 @@ namespace AFS
         {
             SetLoginPassword(MyName, value);
         }
-
-        public void SetUserPass(string value)
+                public void SetUserPass(string value)
         {
             SetLoginPassword(Pass, value);
         }

@@ -28,7 +28,7 @@ namespace AFS
         {
             startPage = Service.UI.Service.LoginPassword(logpass, driver);
             productsPage = Service.UI.Service.AddProduct(pr, driver);
-            Assert.AreEqual("Kungaloosh", productsPage.Check());
+            Assert.AreEqual(pr.prodname, productsPage.Check());
         }
         [Test]
         public void TestOut()

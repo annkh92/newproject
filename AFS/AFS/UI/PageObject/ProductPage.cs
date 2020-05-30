@@ -25,7 +25,7 @@ namespace AFS
         private IWebElement UnitsInStock => driver.FindElement(By.Id("UnitsInStock"));
         private IWebElement UnitsOnOrder => driver.FindElement(By.Id("UnitsOnOrder"));
         private IWebElement ReorderLevel => driver.FindElement(By.Id("ReorderLevel"));
-        private IWebElement ProductCheck => driver.FindElement(By.LinkText("Kungaloosh"));
+        private IWebElement NewProduct => driver.FindElement(By.XPath($"//tr[last()]/td/a"));
         
         public ProductsPage Add()
         {
@@ -36,19 +36,19 @@ namespace AFS
         {
             new Actions(driver).Click(AllProductsLink).Build().Perform();
             new Actions(driver).Click(OkButton).Build().Perform();
-            new Actions(driver).Click().Click(ProductName).SendKeys(pr.prodname).Build().Perform();
-            new Actions(driver).Click().Click(Category).SendKeys(pr.category).Build().Perform();
-            new Actions(driver).Click().Click(Supplier).SendKeys(pr.supplier).Build().Perform();
-            new Actions(driver).Click().Click(UnitPrice).SendKeys(pr.unitprice).Build().Perform();
-            new Actions(driver).Click().Click(QuantityPerUnit).SendKeys(pr.quantity).Build().Perform();
-            new Actions(driver).Click().Click(UnitsInStock).SendKeys(pr.instock).Build().Perform();
-            new Actions(driver).Click().Click(UnitsOnOrder).SendKeys(pr.onorder).Build().Perform();
-            new Actions(driver).Click().Click(ReorderLevel).SendKeys(pr.reorderlevel).Build().Perform();
+            new Actions(driver).Click(ProductName).SendKeys(pr.prodname).Build().Perform();
+            new Actions(driver).Click(Category).SendKeys(pr.category).Build().Perform();
+            new Actions(driver).Click(Supplier).SendKeys(pr.supplier).Build().Perform();
+            new Actions(driver).Click(UnitPrice).SendKeys(pr.unitprice).Build().Perform();
+            new Actions(driver).Click(QuantityPerUnit).SendKeys(pr.quantity).Build().Perform();
+            new Actions(driver).Click(UnitsInStock).SendKeys(pr.instock).Build().Perform();
+            new Actions(driver).Click(UnitsOnOrder).SendKeys(pr.onorder).Build().Perform();
+            new Actions(driver).Click(ReorderLevel).SendKeys(pr.reorderlevel).Build().Perform();
             return this;
         }
         public void SetProductParameter(IWebElement parameter, string value)
         {
-            new Actions(driver).Click().Click(parameter).SendKeys(value).Build().Perform();
+            new Actions(driver).Click(parameter).SendKeys(value).Build().Perform();
         }
 
         public void SetProductName(string value)
@@ -95,7 +95,7 @@ namespace AFS
 
         public string Check()
         {
-            return ProductCheck.Text;
+            return NewProduct.Text;
         }
     }
 }
